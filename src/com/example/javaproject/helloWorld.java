@@ -1,5 +1,6 @@
 package com.example.javaproject;
 
+import com.example.javaproject.FindGeneSimpleAndTest;
 public class helloWorld {
     public static void main(String[] args) {
         String s = "dukeprogramming";
@@ -8,5 +9,8 @@ public class helloWorld {
         System.out.println(x);
         System.out.println("length value " + s.length());
         System.out.println("index of program is " + s.indexOf("program"));
+
+        FindGeneSimpleAndTest testingClass = new FindGeneSimpleAndTest();
+        testingClass.testFindGeneSimple();
     }
 }
