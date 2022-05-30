@@ -20,7 +20,7 @@ public class ParseHTML {
 
             while ((parseLine = br.readLine()) != null) {
                 /* read each line */
-                System.out.println(parseLine);
+//                System.out.println(parseLine);
                 a.add(parseLine);
             }
             br.close();

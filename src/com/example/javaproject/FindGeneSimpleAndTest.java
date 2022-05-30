@@ -44,7 +44,7 @@ public class FindGeneSimpleAndTest {
     }
 
     public void testFindGeneSimple() {
-        String dna1 = "AATGCGTAATATGGT";
+        /*String dna1 = "AATGCGTAATATGGT";
         String dna2 = "AATGCTAGGGTAATATGGT";
         String dna3 = "ATCCTATGCTTCGGCTGCTCTAATATGGT";
         String dna4 = "ATGTAA";
@@ -60,7 +60,11 @@ public class FindGeneSimpleAndTest {
         printDNAStrand(dna5);
         printDNAStrand(dna6);
         printDNAStrand(dna7);
-        printDNAStrand(dna8);
+        printDNAStrand(dna8);*/
+
+        String dna9 = "AAATGCCCTAACTAGATTAAGAAACC";
+        printDNAStrand(dna9);
+
     }
 
     public static void main(String[] args) {
