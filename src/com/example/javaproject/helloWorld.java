@@ -2,6 +2,7 @@ package com.example.javaproject;
 
 import com.example.javaproject.FindGeneSimpleAndTest;
 import com.example.javaproject.Part3;
+import com.example.javaproject.Part4;
 
 public class helloWorld {
     public static void main(String[] args) {
@@ -17,5 +18,8 @@ public class helloWorld {
 
         Part3 testingPart3 = new Part3();
         testingPart3.testing();
+
+        Part4 testingPart4 = new Part4();
+        testingPart4.printYouTubeLink();
     }
 }
