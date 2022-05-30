@@ -29,16 +29,53 @@ public class FindGeneSimpleAndTest {
 
     }
 
-    public void printDNAStrand(String dna){
+    public String findGeneImproved(String dna, String starCodon, String stopCodon) {
+        String result = "";
+        int startIndex = dna.indexOf(starCodon);
+        if (startIndex == -1) // no ATG
+        {
+            return "ATG not found";
+        }
+
+        int stopCodonIndex = startIndex + 3;
+        while (true) {
+            int stopIndex = dna.indexOf(stopCodon, stopCodonIndex);
+            if (stopIndex == -1) // no TAA
+            {
+                return "TAA not found";
+            }
+            result = dna.substring(startIndex, stopIndex + 3);
+            if ((startIndex - stopIndex + 3) % 3 == 0) {
+                return result;
+            } else {
+                stopCodonIndex = stopIndex + 1;
+            }
+        }
+
+
+
+    }
+
+    public void printDNAStrand(String dna, Boolean improve){
         String starCodon = "ATG";
         String stopCodon = "TAA";
         String gene = "";
         System.out.println("DNA strand is " + dna);
-        if( dna.equals(dna.toUpperCase()) ) {
-            gene = findGeneSimple(dna, starCodon, stopCodon);
+        if (improve == false){
+            if( dna.equals(dna.toUpperCase()) ) {
+                gene = findGeneSimple(dna, starCodon, stopCodon);
+            } else {
+                gene = findGeneSimple(dna, starCodon.toLowerCase(), stopCodon.toLowerCase());
+            }
         } else {
-            gene = findGeneSimple(dna, starCodon.toLowerCase(), stopCodon.toLowerCase());
+            if( dna.equals(dna.toUpperCase()) ) {
+                gene = findGeneImproved(dna, starCodon, stopCodon);
+            } else {
+                gene = findGeneImproved(dna, starCodon.toLowerCase(), stopCodon.toLowerCase());
+            }
+
         }
+
 
         System.out.println("Gene is " + gene);
     }
@@ -63,7 +100,10 @@ public class FindGeneSimpleAndTest {
         printDNAStrand(dna8);*/
 
         String dna9 = "AAATGCCCTAACTAGATTAAGAAACC";
-        printDNAStrand(dna9);
+        printDNAStrand(dna9, false);
+
+        String dna10 = "AAATGCCCTACTAGATATAAATTAAGAAACC";
+        printDNAStrand(dna10, true);
 
     }
 
