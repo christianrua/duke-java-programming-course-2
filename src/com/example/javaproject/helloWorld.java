@@ -1,11 +1,13 @@
 package com.example.javaproject;
 
-import com.example.javaproject.AllCodons;
+import com.example.javaproject.PrintAllGenes;
 
 public class helloWorld {
     public static void main(String[] args) {
 
-        AllCodons someTestClass = new AllCodons();
-        someTestClass.testFindStop();
+        PrintAllGenes someTestClass = new PrintAllGenes();
+        //someTestClass.testFindStop();
+        someTestClass.testFindGene();
+
     }
 }

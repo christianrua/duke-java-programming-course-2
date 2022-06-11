@@ -26,7 +26,7 @@ public class FindGeneWhile {
         gene = findGene(dna);
         System.out.println("Gene is " + gene);
 
-        dna = "CGATGGTTGATAAGCCTAAGCTAAA";
+        dna = "CGATGGTTGATAATAGAGCCTAAGCTAAA";
         System.out.println("DNA strand is " + dna);
         gene = findGene(dna);
         System.out.println("Gene is " + gene);

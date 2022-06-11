@@ -6,6 +6,7 @@ import java.util.OptionalInt;
 public class FindGeneWhile3Codons {
 
     int[] starIndexCodonsArray = new int[3];
+    int[] interMediumArray = new int[3];
 
     private int findSmallestCodonIndex(String dna, int startIndex) {
 
@@ -13,10 +14,24 @@ public class FindGeneWhile3Codons {
         starIndexCodonsArray[1] = dna.indexOf("TGA", startIndex);
         starIndexCodonsArray[2] = dna.indexOf("TAG", startIndex);
 
-        int minValue = Arrays.stream(starIndexCodonsArray).min().orElse(-1);
+        int minValue = Arrays.stream(starIndexCodonsArray).filter(
+                entry -> entry > 0
+        ).min().orElse(-1);
 
         return minValue;
 
+    }
+
+    public void filterStreamArrayTest() {
+        starIndexCodonsArray[0] = -1;
+        starIndexCodonsArray[1] = -1;
+        starIndexCodonsArray[2] = -1;
+
+        int minValue = Arrays.stream(starIndexCodonsArray).filter(
+                entry -> entry > 0
+        ).min().orElse(-1);
+
+        System.out.println(minValue);
     }
 
     public String findGene3Codons(String dna) {
