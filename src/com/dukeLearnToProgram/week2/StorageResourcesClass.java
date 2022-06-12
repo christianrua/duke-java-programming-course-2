@@ -1,6 +1,8 @@
 package com.dukeLearnToProgram.week2;
 
-public class Part1 {
+import edu.duke.StorageResource;
+
+public class StorageResourcesClass {
 
     public int findStopCodon(String dnaStr, int startIndex, String stopCodon) {
         int currIndex = dnaStr.indexOf(stopCodon,startIndex + 3);
@@ -44,8 +46,9 @@ public class Part1 {
         return dna.substring(startIndex, minIndex +3);
     }
 
-    public void printAllGenes(String dna){
+    public StorageResource attachAllGenes(String dna){
         int startIndex = 0;
+        StorageResource sr = new StorageResource();
         while (true) {
             String currentGene = findGene(dna,startIndex);
             if (currentGene.isEmpty()) {
@@ -53,8 +56,10 @@ public class Part1 {
             }
 
             System.out.println(currentGene);
+            sr.add(currentGene);
             startIndex = dna.indexOf(currentGene, startIndex) + currentGene.length();
         }
+        return sr;
     }
 
 
@@ -71,18 +76,18 @@ public class Part1 {
 
     }
 
-    public void testFindGene() {
+    public void testAttachAllGenes() {
         System.out.println("testing first dna string");
         String dna1 = "CGATGATCGCATGATTCATGCTTAAATAAAGCTCA";
-        printAllGenes(dna1);
+        System.out.println(attachAllGenes(dna1).size());
 
         System.out.println("testing second dna string");
         String dna2 = "ATGATCTAATTTATGCTGCAACGGTGAAGA";
-        printAllGenes(dna2);
+        System.out.println(attachAllGenes(dna2).size());
 
         System.out.println("tests finished");
 
         String question1 = "AATGCTAACTAGCTGACTAAT";
-        printAllGenes(question1);
+        System.out.println(attachAllGenes(question1).size());
     }
 }
