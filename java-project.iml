@@ -9,5 +9,6 @@
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="apache-csv" level="project" />
     <orderEntry type="library" name="courserajava" level="project" />
+    <orderEntry type="library" name="apache-csv1" level="project" />
   </component>
 </module>
