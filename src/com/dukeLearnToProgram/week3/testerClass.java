@@ -8,6 +8,6 @@ public class testerClass {
 
         public static void main(String[] args) {
             CSVMax testClass = new CSVMax();
-            testClass.testFileWithColdestTemperature();
+            testClass.testColdestInManyDays();
         }
 }

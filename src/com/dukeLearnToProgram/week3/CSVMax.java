@@ -68,7 +68,90 @@ public class CSVMax {
     }
 
     public CSVRecord lowestHumidityInFile(CSVParser parser) {
-        //I'm here
+        CSVRecord lowestHumidity = null;
+        for(CSVRecord record : parser) {
+            if (lowestHumidity == null){
+                lowestHumidity = record;
+            }
+            if(!record.get("Humidity").equals("N/A")){
+                int lowestHumidityInt = Integer.parseInt(lowestHumidity.get("Humidity"));
+                int currentHumidity = Integer.parseInt(record.get("Humidity"));
+                if (currentHumidity < lowestHumidityInt){
+                    lowestHumidity = record;
+                }
+            } else {
+                continue;
+            }
+        }
+        return lowestHumidity;
+
+    }
+
+    public CSVRecord lowestHumidityInManyFiles(){
+        DirectoryResource dr = new DirectoryResource();
+        CSVRecord lowestSoFar = null;
+        for (File f : dr.selectedFiles()) {
+            FileResource fr = new FileResource(f);
+            CSVRecord current = lowestHumidityInFile(fr.getCSVParser());
+            lowestSoFar = getDifferencesOfTwo(current,lowestSoFar, "cold", "Humidity");
+        }
+        return lowestSoFar;
+    }
+
+    public double averageTemperatureInFile(CSVParser parser){
+        double avgTem = 0.0;
+        for(CSVRecord record : parser) {
+            avgTem = avgTem + Double.parseDouble(record.get("TemperatureF"));
+        }
+        avgTem = avgTem/parser.getRecordNumber();
+        return avgTem;
+    }
+
+    public double averageTemperatureWithHighHumidityInFile(CSVParser parser, Integer value) {
+        double avgTem = 0.0;
+        Integer humidityValue = 0;
+        Integer numberOfSumValues = 0;
+        for(CSVRecord record : parser) {
+            humidityValue = Integer.parseInt(record.get("Humidity"));
+            if(humidityValue >= value) {
+                avgTem = avgTem + Double.parseDouble(record.get("TemperatureF"));
+                numberOfSumValues = numberOfSumValues + 1;
+            }
+
+        }
+        avgTem = avgTem/numberOfSumValues;
+        return avgTem;
+    }
+
+    public void testAverageTemperatureInFile() {
+        FileResource fr = new FileResource();
+        double avgTemp = averageTemperatureInFile(fr.getCSVParser());
+        System.out.println("Average temperature in file is " + avgTemp);
+    }
+
+    public void testAverageTemperatureWithHighHumidityInFile(){
+        FileResource fr = new FileResource();
+        double avgTemp = averageTemperatureWithHighHumidityInFile(fr.getCSVParser(), 80);
+        if (avgTemp == 0.0) {
+            System.out.println("No temperatures with that humidity");
+        } else {
+            System.out.println("Average Temp when high Humidity is " + avgTemp);
+        }
+
+    }
+
+
+    public void testLowestHumidityInManyFiles() {
+        CSVRecord lowestHumidity = lowestHumidityInManyFiles();
+        System.out.println("lowest humidity value " + lowestHumidity.get("Humidity")
+                + " at " + lowestHumidity.get("DateUTC"));
+    }
+
+    public void testLowestHumidityInFile(){
+        FileResource fr = new FileResource();
+        CSVRecord lowestHumidity = lowestHumidityInFile(fr.getCSVParser());
+        System.out.println("lowest humidity value " + lowestHumidity.get("Humidity")
+                + " at " + lowestHumidity.get("DateUTC"));
     }
 
     public void testFileWithColdestTemperature() {
@@ -88,6 +171,12 @@ public class CSVMax {
         + " at " + largest.get("DateUTC"));
     }
 
+    public void testColdestInManyDays() {
+        CSVRecord largest = temperatureInManyDays("Cold");
+        System.out.println("coldest temperature was " + largest.get("TemperatureF")
+                + " at " + largest.get("DateUTC"));
+    }
+
     public void testHottestInDay() {
         FileResource fr = new FileResource();
         CSVRecord largest = temperatureHourInFile(fr.getCSVParser(),"hot");
@@ -99,6 +188,6 @@ public class CSVMax {
         FileResource fr = new FileResource();
         CSVRecord largest = temperatureHourInFile(fr.getCSVParser(),"cold");
         System.out.println("coldest temperature was " + largest.get("TemperatureF") +
-                " at "+largest.get("TimeEST"));
+                " at "+largest.get("DateUTC"));
     }
 }

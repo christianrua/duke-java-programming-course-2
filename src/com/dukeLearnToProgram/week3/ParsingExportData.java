@@ -57,12 +57,12 @@ public class ParsingExportData {
         FileResource fr = new FileResource();
         CSVParser parser = fr.getCSVParser();
 
-        String countryInfoResult = countryInfo(parser, "Nauru");
-        System.out.println("countryInfoResult "+countryInfoResult);
-        System.out.println("listExportersTwoProducts results: ");
-        listExportersTwoProducts(fr.getCSVParser(), "gold","diamonds");
-        int numberOfExportersResult = numberOfExporters(fr.getCSVParser(), "gold");
-        System.out.println("numberOfExportersResult " + numberOfExportersResult);
+//        String countryInfoResult = countryInfo(parser, "Nauru");
+//        System.out.println("countryInfoResult "+countryInfoResult);
+//        System.out.println("listExportersTwoProducts results: ");
+//        listExportersTwoProducts(fr.getCSVParser(), "cotton","flowers");
+//        int numberOfExportersResult = numberOfExporters(fr.getCSVParser(), "cocoa");
+//        System.out.println("numberOfExportersResult " + numberOfExportersResult);
         System.out.println("bigExporters result: ");
         bigExporters(fr.getCSVParser(), "$999,999,999,999");
     }
