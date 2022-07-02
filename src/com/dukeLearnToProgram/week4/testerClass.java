@@ -8,6 +8,6 @@ public class testerClass {
 
         public static void main(String[] args) {
             BabyBirths testClass = new BabyBirths();
-            testClass.testWhatIsNameInYear();
+            testClass.testGetAverageRank();
         }
 }

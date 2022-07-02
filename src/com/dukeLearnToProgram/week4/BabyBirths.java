@@ -100,8 +100,58 @@ public class BabyBirths {
         System.out.println(name + " born in "+year+" would be "+newName+" if she/he was born in "+newYear);
     }
 
-    public int yearOfHighestRank(){
-        //I'm Here
+    private int getYearValue(File f){
+        return Integer.parseInt(f.getName().substring(3,7));
+    }
+
+    public int yearOfHighestRank(String name, String gender){
+        int highestRank = 10000;
+        int tempHighestRank = 0;
+        int highestRankYear = -1;
+
+        DirectoryResource dr = new DirectoryResource();
+        for (File f : dr.selectedFiles()) {
+            // process each file in turn
+            int fileYear = getYearValue(f);
+            tempHighestRank =  getRank(fileYear, name, gender, "true");
+            if(tempHighestRank < highestRank){
+                highestRank = tempHighestRank;
+                highestRankYear = fileYear;
+            }
+        }
+
+        return  highestRankYear;
+    }
+
+    public double getAverageRank(String name, String gender) {
+        double averageRank = 0;
+        int counter = 0;
+        int rankValue = 0;
+
+        DirectoryResource dr = new DirectoryResource();
+        for (File f : dr.selectedFiles()) {
+            // process each file in turn
+            counter = counter + 1;
+            int fileYear = getYearValue(f);
+            rankValue =  getRank(fileYear, name, gender, "true");
+            averageRank = averageRank + rankValue;
+        }
+        return averageRank/counter;
+    }
+
+    public int getTotalBirthsRankedHigher(int year, String name, String gender){
+        //I'm here.
+    }
+
+    public void testGetAverageRank(){
+        double avgRankValue = getAverageRank("Jacob","M");
+        System.out.println("Value for Mason " + avgRankValue);
+
+    }
+
+    public void testYearOfHighestRank(){
+        int yearOfHighestRankValue = yearOfHighestRank("Mason","M");
+        System.out.println("the yearOfHighestRankValue is " + yearOfHighestRankValue);
     }
 
     public void testTotalBirths() {
